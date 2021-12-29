@@ -22,3 +22,6 @@
 [submodule "bundle/undo-tree-visualization"]
 	path = bundle/undo-tree-visualization
 	url = https://github.com/nelstrom/Vim-undo-tree-visualization.git
+[submodule "bundle/gundo"]
+	path = bundle/gundo
+	url = https://github.com/sjl/gundo.vim.git
