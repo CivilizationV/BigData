@@ -19,3 +19,6 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/undo-tree-visualization"]
+	path = bundle/undo-tree-visualization
+	url = https://github.com/nelstrom/Vim-undo-tree-visualization.git
