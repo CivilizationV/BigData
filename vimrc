@@ -76,7 +76,7 @@ xnoremap & :&&<CR>
 :set hidden
 
 " Execute ctags Manually
-:nnoremap <f5> :!ctags -R<CR>
+:nnoremap <f9> :!ctags -R<CR>
 " Automatically Execute ctags Each Time a File is Saved
 " :autocmd BufWritePost * call system("ctags -R")
 
@@ -180,3 +180,10 @@ nmap <leader>= :call Preserve("normal gg=G")<CR>
 " http://vimcasts.org/episodes/bubbling-text/
 " Visually select the text that was last edited/pasted
 " nmap gV `[v`]
+
+" http://vimcasts.org/episodes/undo-branching-and-gundo-vim/
+" Gundo.vim
+if has('python3') 
+	let g:gundo_prefer_python3 = 1 
+endif
+nnoremap <F8> :GundoToggle<CR>
