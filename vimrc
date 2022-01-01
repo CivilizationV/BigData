@@ -49,6 +49,7 @@ endif
 
 
 " Self added
+set laststatus=2
 " Tim Pope
 " pathogen.vim
 " https://github.com/tpope/vim-pathogen
