@@ -188,3 +188,14 @@ if has('python3')
 	let g:gundo_prefer_python3 = 1 
 endif
 nnoremap <F8> :GundoToggle<CR>
+
+" http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
+" https://github.com/altercation/vim-colors-solarized
+" At first, set terminal emulator's colorscheme to used the Solarized palette
+syntax enable
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized
