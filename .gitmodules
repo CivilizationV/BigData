@@ -31,3 +31,6 @@
 [submodule "bundle/markdown-folding"]
 	path = bundle/markdown-folding
 	url = https://github.com/masukomi/vim-markdown-folding.git
+[submodule "bundle/repeat"]
+	path = bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
