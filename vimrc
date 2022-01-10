@@ -198,5 +198,5 @@ if has('gui_running')
 else
     set background=dark
 endif
-colorscheme solarized
+colorscheme solarized8
 set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
