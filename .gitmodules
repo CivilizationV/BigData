@@ -37,3 +37,9 @@
 [submodule "bundle/exchange"]
 	path = bundle/exchange
 	url = https://github.com/tommcdo/vim-exchange.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/highlightedyank"]
+	path = bundle/highlightedyank
+	url = https://github.com/machakann/vim-highlightedyank.git
