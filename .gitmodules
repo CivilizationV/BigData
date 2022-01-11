@@ -1,48 +1,51 @@
-[submodule "bundle/fugitive"]
-	path = bundle/fugitive
-	url = http://github.com/tpope/vim-fugitive.git
-[submodule "bundle/surround"]
-	path = bundle/surround
-	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/unimpaired"]
-	path = bundle/unimpaired
-	url = https://github.com/tpope/vim-unimpaired.git
-[submodule "bundle/HiLinkTrace"]
-	path = bundle/HiLinkTrace
-	url = https://github.com/gerw/vim-HiLinkTrace.git
-[submodule "bundle/visual-star-search"]
-	path = bundle/visual-star-search
-	url = https://github.com/nelstrom/vim-visual-star-search.git
-[submodule "bundle/abolish"]
-	path = bundle/abolish
-	url = https://github.com/tpope/vim-abolish.git
-[submodule "bundle/tabular"]
-	path = bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
-[submodule "bundle/undo-tree-visualization"]
-	path = bundle/undo-tree-visualization
-	url = https://github.com/nelstrom/Vim-undo-tree-visualization.git
 [submodule "bundle/gundo"]
 	path = bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
 [submodule "bundle/colors-solarized"]
 	path = bundle/colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/markdown-folding"]
-	path = bundle/markdown-folding
+[submodule "bundle/undo-tree-visualization"]
+	path = bundle/undo-tree-visualization
+	url = https://github.com/nelstrom/Vim-undo-tree-visualization.git
+[submodule "pack/minpac/opt/minpac"]
+	path = pack/minpac/opt/minpac
+	url = https://github.com/k-takata/minpac.git
+[submodule "pack/minpac/start/tabular"]
+	path = pack/minpac/start/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "pack/minpac/start/vim-surround"]
+	path = pack/minpac/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "pack/minpac/start/vim-fugitive"]
+	path = pack/minpac/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "pack/minpac/start/vim-unimpaired"]
+	path = pack/minpac/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "pack/minpac/start/vim-HiLinkTrace"]
+	path = pack/minpac/start/vim-HiLinkTrace
+	url = https://github.com/gerw/vim-HiLinkTrace.git
+[submodule "pack/minpac/start/vim-visual-star-search"]
+	path = pack/minpac/start/vim-visual-star-search
+	url = https://github.com/nelstrom/vim-visual-star-search.git
+[submodule "pack/minpac/start/vim-abolish"]
+	path = pack/minpac/start/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git
+[submodule "pack/minpac/start/vim-markdown-folding"]
+	path = pack/minpac/start/vim-markdown-folding
 	url = https://github.com/masukomi/vim-markdown-folding.git
-[submodule "bundle/repeat"]
-	path = bundle/repeat
+[submodule "pack/minpac/start/vim-repeat"]
+	path = pack/minpac/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "bundle/exchange"]
-	path = bundle/exchange
+[submodule "pack/minpac/start/vim-exchange"]
+	path = pack/minpac/start/vim-exchange
 	url = https://github.com/tommcdo/vim-exchange.git
-[submodule "bundle/ultisnips"]
-	path = bundle/ultisnips
+[submodule "pack/minpac/start/ultisnips"]
+	path = pack/minpac/start/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule "bundle/highlightedyank"]
-	path = bundle/highlightedyank
+[submodule "pack/minpac/start/vim-highlightedyank"]
+	path = pack/minpac/start/vim-highlightedyank
 	url = https://github.com/machakann/vim-highlightedyank.git
-[submodule "bundle/solarized8"]
-	path = bundle/solarized8
+[submodule "pack/minpac/start/vim-solarized8"]
+	path = pack/minpac/start/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
