@@ -49,3 +49,12 @@
 [submodule "pack/minpac/start/vim-solarized8"]
 	path = pack/minpac/start/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "pack/minpac/start/gundo.vim"]
+	path = pack/minpac/start/gundo.vim
+	url = https://github.com/sjl/gundo.vim.git
+[submodule "pack/minpac/opt/ack.vim"]
+	path = pack/minpac/opt/ack.vim
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "pack/minpac/opt/ag.vim"]
+	path = pack/minpac/opt/ag.vim
+	url = https://github.com/rking/ag.vim.git
