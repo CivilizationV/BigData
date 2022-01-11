@@ -75,6 +75,7 @@ call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('mileszs/ack.vim', {'type':'opt'})
 call minpac#add('rking/ag.vim', {'type':'opt'})
+call minpac#add('altercation/vim-colors-solarized')
 
 
 runtime macros/matchit.vim

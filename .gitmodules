@@ -1,6 +1,3 @@
-[submodule "bundle/colors-solarized"]
-	path = bundle/colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/undo-tree-visualization"]
 	path = bundle/undo-tree-visualization
 	url = https://github.com/nelstrom/Vim-undo-tree-visualization.git
@@ -55,3 +52,6 @@
 [submodule "pack/minpac/opt/ag.vim"]
 	path = pack/minpac/opt/ag.vim
 	url = https://github.com/rking/ag.vim.git
+[submodule "pack/minpac/start/vim-colors-solarized"]
+	path = pack/minpac/start/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
