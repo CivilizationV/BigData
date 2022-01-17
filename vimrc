@@ -78,13 +78,13 @@ call minpac#add('kana/vim-vspec', {'type':'opt'})
 runtime macros/matchit.vim
 
 " Enable line numbering
-:set number
+set number
 
 " Enable file-type plugin
 set nocompatible
 
 " Enable incremental search
-:set incsearch
+set incsearch
 " Mute Search Highlighting
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
@@ -93,10 +93,10 @@ nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
 " Enable the ‘hidden’ Setting Before Running ‘:*do’ Commands
-:set hidden
+set hidden
 
 " Execute ctags Manually
-:nnoremap <f9> :!ctags -R<CR>
+nnoremap <f9> :!ctags -R<CR>
 " Automatically Execute ctags Each Time a File is Saved
 " :autocmd BufWritePost * call system("ctags -R")
 
@@ -104,10 +104,10 @@ xnoremap & :&&<CR>
 nmap <leader>l :set list!<CR>
 
 " Tab settings
-:set tabstop=4
-:set softtabstop=4
-:set shiftwidth=4
-:set noexpandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
 
 " http://vimcasts.org/episodes/the-edit-command/
 " set of shortcuts for opening files located in the same directory as the
@@ -219,3 +219,8 @@ else
 endif
 colorscheme solarized8
 set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+
+
+" http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
+nnoremap <silent> <Plug>TransposeCharacters xp :call repeat#set("\<Plug>TransposeCharacters")<CR>
+nmap cp <Plug>TransposeCharacters
