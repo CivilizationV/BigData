@@ -111,9 +111,11 @@ command! -nargs=* Wrap set wrap linebreak nolist
 if has("autocmd")
 	" Enable filetype detection
 	filetype plugin indent on
+	" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 	" Syntax of these languages is fussy over tabs Vs spaces
 	autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
 	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab textwidth=79
 
 	" Restore cursor position
 	autocmd BufReadPost *
@@ -122,7 +124,7 @@ if has("autocmd")
 		\ endif
 
 	" Source the vimrc file after saving it
-	autocmd bufwritepost .vimrc source $MYVIMRC
+	autocmd BufWritePost .vimrc source $MYVIMRC
 endif
 if &t_Co > 2 || has("gui_running")
 	" Enable syntax highlighting
@@ -203,3 +205,7 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
 nnoremap <silent> <Plug>TransposeCharacters xp :call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap cp <Plug>TransposeCharacters
+
+" Set the tree style the default listing style.
+let g:netrw_liststyle= 3
+
