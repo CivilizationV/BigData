@@ -50,6 +50,7 @@ endif
 
 " Self added
 set laststatus=2
+set nobackup
 
 " http://vimcasts.org/episodes/minpac/
 source ~/.vim/packages.vim
