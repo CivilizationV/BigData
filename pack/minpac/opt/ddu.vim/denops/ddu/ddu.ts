@@ -1,11 +1,13 @@
 import { assertEquals, Denops, fn, op, parse, toFileUrl } from "./deps.ts";
 import {
   ActionFlags,
+  Actions,
   BaseFilter,
   BaseKind,
   BaseSource,
   BaseUi,
   Context,
+  DduEvent,
   DduExtType,
   DduItem,
   DduOptions,
@@ -34,6 +36,7 @@ import { defaultUiOptions, defaultUiParams } from "./base/ui.ts";
 import { defaultSourceOptions, defaultSourceParams } from "./base/source.ts";
 import { defaultFilterOptions, defaultFilterParams } from "./base/filter.ts";
 import { defaultKindOptions, defaultKindParams } from "./base/kind.ts";
+import { Lock } from "https://deno.land/x/async@v1.1.5/mod.ts";
 
 type GatherState = {
   items: DduItem[];
@@ -56,7 +59,10 @@ export class Ddu {
   private input = "";
   private context: Context = defaultContext();
   private options: DduOptions = defaultDduOptions();
+  private userOptions: Record<string, unknown> = {};
   private initialized = false;
+  private finished = false;
+  private lock = new Lock();
 
   async start(
     denops: Denops,
@@ -67,17 +73,16 @@ export class Ddu {
     await this.autoload(denops, "source", options.sources.map((s) => s.name));
 
     this.context = context;
+    this.userOptions = userOptions;
 
     if (this.initialized && userOptions?.resume) {
       // Note: sources must not overwrite
       userOptions.sources = this.options.sources;
-      this.options = foldMerge(mergeDduOptions, defaultDduOptions, [
-        this.options,
-        userOptions,
-      ]);
 
-      if (userOptions?.input) {
-        this.input = userOptions.input as string;
+      this.updateOptions(userOptions);
+
+      if (userOptions?.input != null) {
+        this.setInput(userOptions.input as string);
       }
 
       if (!userOptions?.refresh) {
@@ -87,8 +92,10 @@ export class Ddu {
       }
     } else {
       this.options = options;
-      this.input = this.options.input;
+      this.setInput(this.options.input);
     }
+
+    this.initialized = false;
 
     this.refresh(denops);
 
@@ -98,6 +105,8 @@ export class Ddu {
   async refresh(
     denops: Denops,
   ): Promise<void> {
+    this.finished = false;
+
     let index = 0;
     for (const userSource of this.options.sources) {
       const currentIndex = index;
@@ -109,7 +118,7 @@ export class Ddu {
       if (!this.sources[userSource.name]) {
         await denops.call(
           "ddu#util#print_error",
-          `Invalid source is detected: ${userSource.name}`,
+          `Invalid source: ${userSource.name}`,
         );
 
         continue;
@@ -121,6 +130,15 @@ export class Ddu {
         userSource,
         source,
       );
+
+      if (!this.initialized) {
+        await source.onInit({
+          denops,
+          sourceOptions,
+          sourceParams,
+        });
+      }
+
       const sourceItems = source.gather({
         denops: denops,
         context: this.context,
@@ -139,13 +157,17 @@ export class Ddu {
 
         if (!v.value || v.done) {
           state.done = true;
-          await this.redraw(denops);
+          if (!this.finished) {
+            await this.redraw(denops);
+          }
           return;
         }
 
         const newItems = v.value.map((item: Item) => {
           const matcherKey = (sourceOptions.matcherKey in item)
-            ? (item as Record<string, string>)[sourceOptions.matcherKey]
+            ? (item as Record<string, unknown>)[
+              sourceOptions.matcherKey
+            ] as string
             : item.word;
           return {
             ...item,
@@ -157,11 +179,17 @@ export class Ddu {
         // Update items
         if (state.items.length != 0) {
           state.items = state.items.concat(newItems);
-
-          // Note: skip first update for narrowing
-          await this.redraw(denops);
+          if (!this.finished) {
+            await this.redraw(denops);
+          }
         } else {
           state.items = newItems;
+        }
+
+        if (this.finished) {
+          reader.cancel();
+          // Note: Must return after cancel()
+          return;
         }
 
         reader.read().then(readChunk);
@@ -206,13 +234,46 @@ export class Ddu {
       items: allItems,
     });
 
-    await ui.redraw({
-      denops: denops,
-      context: this.context,
-      options: this.options,
-      uiOptions: uiOptions,
-      uiParams: uiParams,
+    // Note: redraw must be locked
+    await this.lock.with(async () => {
+      await ui.redraw({
+        denops: denops,
+        context: this.context,
+        options: this.options,
+        uiOptions: uiOptions,
+        uiParams: uiParams,
+      });
     });
+  }
+
+  async onEvent(
+    denops: Denops,
+    event: DduEvent,
+  ): Promise<void> {
+    for (const userSource of this.options.sources) {
+      const source = this.sources[userSource.name];
+      const [sourceOptions, sourceParams] = sourceArgs(
+        this.options,
+        userSource,
+        source,
+      );
+
+      // The source may not have "onEvent"
+      if (!source.onEvent) {
+        continue;
+      }
+
+      await source.onEvent({
+        denops,
+        sourceOptions,
+        sourceParams,
+        event,
+      });
+    }
+  }
+
+  quit() {
+    this.finished = true;
   }
 
   async uiAction(
@@ -245,32 +306,117 @@ export class Ddu {
     }
   }
 
-  async doAction(
+  async getItemActions(
     denops: Denops,
-    actionName: string,
     items: DduItem[],
-    params: unknown,
-  ): Promise<void> {
-    if (actionName == "default") {
-      // Use default action
-      actionName = "open";
+  ): Promise<Actions<Record<string, unknown>> | null> {
+    const sources = [
+      ...new Set(items.map((item) => this.sources[item.__sourceName])),
+    ];
+    if (sources.length != 1) {
+      await denops.call(
+        "ddu#util#print_error",
+        `You must not mix multiple sources items: "${
+          sources.map((source) => source.name)
+        }"`,
+      );
+      return null;
     }
+    const source = sources[0];
 
     const kinds = [
-      ...new Set(items.map((item) => this.sources[item.__sourceName].kind)),
+      ...new Set(sources.map((source) => source.kind)),
     ];
     if (kinds.length != 1) {
       await denops.call(
         "ddu#util#print_error",
         `You must not mix multiple kinds: "${kinds}"`,
       );
-      return;
+      return null;
     }
 
     await this.autoload(denops, "kind", kinds);
 
-    // Quit UI before action
+    const kindName = kinds[0];
+    const kind = this.kinds[kindName];
+    if (!kind) {
+      await denops.call(
+        "ddu#util#print_error",
+        `Invalid kind: ${kindName}`,
+      );
+      return null;
+    }
+
+    const [kindOptions, _1] = kindArgs(this.options, kind);
+    const [sourceOptions, _2] = sourceArgs(this.options, null, source);
+
+    return Object.assign(
+      kind.actions,
+      kindOptions.actions,
+      source.actions,
+      sourceOptions.actions,
+    );
+  }
+
+  async itemAction(
+    denops: Denops,
+    actionName: string,
+    items: DduItem[],
+    params: unknown,
+  ): Promise<void> {
+    const actions = await this.getItemActions(denops, items);
+    if (!actions) {
+      // Error
+      return;
+    }
+
+    const sources = [
+      ...new Set(items.map((item) => this.sources[item.__sourceName])),
+    ];
+
+    const [sourceOptions, _] = sourceArgs(
+      this.options,
+      null,
+      sources[0],
+    );
+
+    const kinds = [
+      ...new Set(sources.map((source) => source.kind)),
+    ];
+    const kindName = kinds[0];
+    const kind = this.kinds[kindName];
+
+    const [kindOptions, kindParams] = kindArgs(this.options, kind);
+
+    // Get default action
+    if (actionName == "default") {
+      actionName = sourceOptions.defaultAction;
+      if (actionName == "") {
+        // Use kind default action
+        actionName = kindOptions.defaultAction;
+      }
+
+      if (actionName == "") {
+        await denops.call(
+          "ddu#util#print_error",
+          `The default action is not defined for the items`,
+        );
+        return;
+      }
+    }
+
+    const action = actions[actionName];
+    if (!action) {
+      await denops.call(
+        "ddu#util#print_error",
+        `Invalid action: ${actionName}`,
+      );
+      return;
+    }
+
     const [ui, uiOptions, uiParams] = await this.getUi(denops);
+
+    // Quit UI before action
     await ui.quit({
       denops: denops,
       context: this.context,
@@ -279,28 +425,35 @@ export class Ddu {
       uiParams: uiParams,
     });
 
-    const kindName = kinds[0];
-    const kind = this.kinds[kindName];
-    if (!kind) {
-      await denops.call(
-        "ddu#util#print_error",
-        `Invalid kind is detected: ${kindName}`,
-      );
-
-      return;
+    let flags: ActionFlags;
+    if (sourceOptions.actions[actionName] || kindOptions.actions[actionName]) {
+      flags = await denops.call("ddu#custom#_call_action", action, {
+        options: this.options,
+        actionParams: params,
+        items: items,
+      }) as ActionFlags;
+    } else {
+      flags = await action({
+        denops: denops,
+        options: this.options,
+        kindOptions: kindOptions,
+        kindParams: kindParams,
+        actionParams: params,
+        items: items,
+      });
     }
 
-    const [kindOptions, kindParams] = kindArgs(this.options, kind);
-
-    const action = kind.actions[actionName];
-    await action({
-      denops: denops,
-      options: this.options,
-      kindOptions: kindOptions,
-      kindParams: kindParams,
-      actionParams: params,
-      items: items,
-    });
+    if (flags & ActionFlags.RefreshItems) {
+      await this.refresh(denops);
+    } else if (flags & ActionFlags.Persist) {
+      await ui.redraw({
+        denops: denops,
+        context: this.context,
+        options: this.options,
+        uiOptions: uiOptions,
+        uiParams: uiParams,
+      });
+    }
   }
 
   async register(type: DduExtType, path: string, name: string) {
@@ -403,6 +556,21 @@ export class Ddu {
     this.input = input;
   }
 
+  getOptions() {
+    return this.options;
+  }
+
+  getUserOptions() {
+    return this.userOptions;
+  }
+
+  updateOptions(userOptions: Record<string, unknown>) {
+    this.options = foldMerge(mergeDduOptions, defaultDduOptions, [
+      this.options,
+      userOptions,
+    ]);
+  }
+
   private async getUi(
     denops: Denops,
   ): Promise<
@@ -412,7 +580,7 @@ export class Ddu {
     if (!this.uis[this.options.ui]) {
       await denops.call(
         "ddu#util#print_error",
-        `Invalid ui is detected: "${this.options.ui}"`,
+        `Invalid ui: "${this.options.ui}"`,
       );
       return Promise.reject();
     }
@@ -452,7 +620,7 @@ export class Ddu {
       if (!filter) {
         await denops.call(
           "ddu#util#print_error",
-          `Invalid filter is detected: ${filterName}`,
+          `Invalid filter: ${filterName}`,
         );
 
         continue;
@@ -489,7 +657,7 @@ function uiArgs<
     ],
   );
   const p = foldMerge(mergeUiParams, defaultUiParams, [
-    ui.params ? ui.params() : null,
+    ui.params(),
     options.uiParams["_"],
     options.uiParams[ui.name],
   ]);
@@ -501,7 +669,7 @@ function sourceArgs<
   UserData extends unknown,
 >(
   options: DduOptions,
-  userSource: UserSource,
+  userSource: UserSource | null,
   source: BaseSource<Params, UserData>,
 ): [SourceOptions, Record<string, unknown>] {
   const o = foldMerge(
@@ -510,14 +678,14 @@ function sourceArgs<
     [
       options.sourceOptions["_"],
       options.sourceOptions[source.name],
-      userSource.options,
+      userSource?.options,
     ],
   );
   const p = foldMerge(mergeSourceParams, defaultSourceParams, [
-    source.params ? source.params() : null,
+    source?.params(),
     options.sourceParams["_"],
     options.sourceParams[source.name],
-    userSource.params,
+    userSource?.params,
   ]);
   return [o, p];
 }
@@ -537,9 +705,9 @@ function filterArgs<
     ],
   );
   const p = foldMerge(mergeFilterParams, defaultFilterParams, [
-    filter.params ? filter.params() : null,
-    options.sourceParams["_"],
-    options.sourceParams[filter.name],
+    filter?.params(),
+    options.filterParams["_"],
+    options.filterParams[filter.name],
   ]);
   return [o, p];
 }
@@ -559,9 +727,9 @@ function kindArgs<
     ],
   );
   const p = foldMerge(mergeKindParams, defaultKindParams, [
-    kind.params ? kind.params() : null,
-    options.sourceParams["_"],
-    options.sourceParams[kind.name],
+    kind?.params(),
+    options.kindParams["_"],
+    options.kindParams[kind.name],
   ]);
   return [o, p];
 }

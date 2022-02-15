@@ -19,15 +19,6 @@ endif
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
-if has("vms")
-	set nobackup		" do not keep a backup file, use versions instead
-else
-	set backup		" keep a backup file (restore to previous version)
-	if has('persistent_undo')
-		set undofile	" keep an undo file (undo changes after closing)
-	endif
-endif
-
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
 	au!
@@ -47,10 +38,8 @@ if has('syntax') && has('eval')
 endif
 
 
-
 " Self added
 set laststatus=2
-set nobackup
 
 " http://vimcasts.org/episodes/minpac/
 source ~/.vim/packages.vim
@@ -114,9 +103,11 @@ if has("autocmd")
 	filetype plugin indent on
 	" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 	" Syntax of these languages is fussy over tabs Vs spaces
-	autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab textwidth=79
+	autocmd FileType make setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+	autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+	autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab textwidth=79 foldmethod=indent
+    autocmd FileType c setlocal foldmethod=marker foldmarker={,}
+    autocmd FileType java setlocal foldmethod=marker foldmarker={,}
 
 	" Restore cursor position
 	autocmd BufReadPost *
@@ -207,6 +198,11 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 nnoremap <silent> <Plug>TransposeCharacters xp :call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap cp <Plug>TransposeCharacters
 
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+set nofoldenable
+
 " python
 let g:pymode_doc = 1
 let g:pymode_syntax = 1
@@ -219,7 +215,7 @@ let g:pymode_run_bind = '<leader>r'
 let g:pymode_lint = 1
 let g:pymode_breakpoint = 1
 let g:pymode_virtualenv = 1
-let g:pymode_folding = 0
+" let g:pymode_folding = 0
 
 let g:pymode_options = 1
 
@@ -228,3 +224,8 @@ let g:pymode_rope_autoimport_modules = ["os", "shutil", "datetime"]
 
 let g:pymode_rope_completion = 1
 let g:pymode_rope_autoimport = 0
+
+
+let vim_markdown_preview_pandoc=1
+let vim_markdown_preview_browser='Firefox'
+let vim_markdown_preview_hotkey='<C-m>'

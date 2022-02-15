@@ -4,11 +4,20 @@ endfunction
 function! ddu#redraw(name, ...) abort
   call ddu#_notify('redraw', [a:name, get(a:000, 0, {})])
 endfunction
+function! ddu#event(name, event) abort
+  call ddu#_request('event', [a:name, a:event])
+endfunction
+function! ddu#pop(name) abort
+  call ddu#_notify('pop', [a:name])
+endfunction
 function! ddu#ui_action(name, action, params) abort
   call ddu#_request('uiAction', [a:name, a:action, a:params])
 endfunction
-function! ddu#do_action(name, action, items, params) abort
-  call ddu#_request('doAction', [a:name, a:action, a:items, a:params])
+function! ddu#item_action(name, action, items, params) abort
+  call ddu#_request('itemAction', [a:name, a:action, a:items, a:params])
+endfunction
+function! ddu#get_item_actions(name, items) abort
+  return ddu#_request('getItemActions', [a:name, a:items])
 endfunction
 
 function! ddu#_request(name, args) abort
@@ -33,9 +42,9 @@ function! ddu#_init() abort
     return
   endif
 
-  if !has('patch-8.2.0662') && !has('nvim-0.5')
+  if !has('patch-8.2.0662') && !has('nvim-0.6')
     call ddu#util#print_error(
-          \ 'ddu requires Vim 8.2.0662+ or neovim 0.5.0+.')
+          \ 'ddu requires Vim 8.2.0662+ or neovim 0.6.0+.')
     return 1
   endif
 

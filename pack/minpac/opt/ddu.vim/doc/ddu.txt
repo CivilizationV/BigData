@@ -1,6 +1,5 @@
 *ddu.txt*	Dark deno-powered UI framework for neovim/Vim8
 
-Version: 0.3
 Author: Shougo <Shougo.Matsu at gmail.com>
 License: MIT license
 
@@ -9,7 +8,6 @@ CONTENTS						*ddu-contents*
 Introduction		|ddu-introduction|
 Install			|ddu-install|
 Interface		|ddu-interface|
-  Key mappings		  |ddu-key-mappings|
   Options		  |ddu-options|
   Functions		  |ddu-functions|
   Custom Functions	  |ddu-custom-functions|
@@ -52,7 +50,7 @@ It does not work with zero configuration.  You can use other plugins.
 ==============================================================================
 INSTALL							*ddu-install*
 
-Note: ddu.vim requires Neovim (0.5.0+) or Vim8.2.0662+ (latest is
+Note: ddu.vim requires Neovim (0.6.0+) or Vim8.2.0662+ (latest is
 recommended).
 
 Please install both Deno and "denops.vim".
@@ -68,10 +66,6 @@ https://github.com/topics/ddu-vim.
 
 ==============================================================================
 INTERFACE						*ddu-interface*
-
-
-------------------------------------------------------------------------------
-KEY MAPPINGS 						*ddu-key-mappings*
 
 
 ------------------------------------------------------------------------------
@@ -103,13 +97,18 @@ name
 
 		Default: "default"
 
+							*ddu-option-push*
+push
+		Save the current ddu state and create new ddu state.
+		Note: The state can be restored by |ddu#pop()|.
+
 							*ddu-option-refresh*
 refresh
 		Refresh the items when |ddu-option-resume|.
 
 							*ddu-option-resume*
 resume
-		Reuse the previous state.  If none exist, a new denite
+		Reuse the previous state.  If none exist, a new ddu
 		state is created.
 		Note: Uses |ddu-option-name| to search for previous state.
 
@@ -169,19 +168,49 @@ uiParams
 
 		Default: {}
 
+							*ddu-option-volatile*
+volatile
+		Refresh items when |ddu#redraw()|.
+
 ------------------------------------------------------------------------------
 FUNCTIONS 						*ddu-functions*
 
-							*ddu#do_action()*
-ddu#do_action({name}, {items})
-		Do the {name} action for {items}.
+							*ddu#quit()*
+ddu#event({name}, {event})
+		Call the ddu event handler.
+
+		{name} is specified ddu name(|ddu-option-name|).
+
+		{event} is the event name string.
+
+			"cancel": After cancel the UI
+			"close": After close the UI
+
+						*ddu#get_item_actions()*
+ddu#get_item_actions({name}, {items})
+		Get the {name} actions for {items}.
+		Note: You cannot mix multiple kinds/sources.
+
+							*ddu#item_action()*
+ddu#item_action({name}, {action}, {items}, {params})
+		Do the {action} action for {items}.
+		Note: You cannot mix multiple kinds/sources.
+
+		{name} is specified ddu name(|ddu-option-name|).
+
+		{params} is action params.
 
 		Note: It is for creating UI interface.
+
+							*ddu#pop()*
+ddu#pop({name})
+		Restore the previous state.
+		If the state is empty, "cancel" the current ddu.
+		Note The previous state is saved by |ddu-option-push|.
 
 							*ddu#redraw()*
 ddu#redraw({name}[, {opt}])
 		Redraw the UI.
-		Note: It does not refresh items.
 
 		{name} is specified ddu name(|ddu-option-name|).
 
@@ -193,15 +222,30 @@ ddu#redraw({name}[, {opt}])
 		refreshItems			(boolean)
 		If it is true, refresh current items.
 
+		updateOptions			(dictionary)
+		Overwrites options. Refer to |ddu-options| about options.
+
 							*ddu#start()*
 ddu#start({options})
-		Creates a new Ddu buffer.
+		Creates a new Ddu.
 
 		Refer to |ddu-options| about {options}.  If you skip a value,
 		it uses the default value.
 
 CUSTOM FUNCTIONS 					*ddu-custom-functions*
 
+							*ddu#custom#action()*
+ddu#custom#action({type}, {source-kind-name}, {action-name}, {func})
+		Define {action-name} action for {source-kind-name}.
+		{type} must be "source" or "filter".
+		{source-kind-name} is source or kind name.
+		{func} must be a |Funcref| or the name of a function.
+>
+		call ddu#custom#action('kind', 'file', 'test',
+		    \ { args -> execute('let g:foo = 1') })
+		call ddu#custom#action('source', 'file_old', 'test2',
+		    \ { args -> execute('let g:bar = 1') })
+<
 							*ddu#custom#alias()*
 ddu#custom#alias({type}, {alias-name}, {base-name})
 		Define {alias-name} alias based on {base-name}.
@@ -239,11 +283,22 @@ ddu#custom#patch_local({buffer-name}, {dict})
 ==============================================================================
 EXAMPLES						*ddu-examples*
 >
-	" You must set the default ui in the first
-	" Note: std ui
-	" https://github.com/Shougo/ddu-ui-std
+	" You must set the default ui.
+	" Note: ff ui
+	" https://github.com/Shougo/ddu-ui-ff
 	call ddu#custom#patch_global({
-	    \ 'ui': 'std',
+	    \ 'ui': 'ff',
+	    \ })
+
+	" You must set the default action.
+	" Note: file kind
+	" https://github.com/Shougo/ddu-kind-file
+	call ddu#custom#patch_global({
+	    \   'kindOptions': {
+	    \     'file': {
+	    \       'defaultAction': 'open',
+	    \     },
+	    \   }
 	    \ })
 
 	" Specify matcher.
@@ -300,17 +355,10 @@ Note: The UIs cannot set default options for UI.  If the UI need
 to specify the recommended configuration, you should write it in the
 documentation instead.
 
-						*ddu-ui-option-autoAction*
-autoAction
-		When you select a item, it runs the action automatically.
-
-		Default: ""
-
 						*ddu-ui-option-defaultAction*
 defaultAction
 		Specify the default action.
-		Note: It overwrites all default actions includes kind/source
-		default actions.
+		Note: It overwrites kind/source default actions.
 
 		Default: "default"
 
@@ -338,11 +386,47 @@ Note: The sources cannot set default options for source.  If the source need
 to specify the recommended configuration, you should write it in the
 documentation instead.
 
+				    		*ddu-source-option-converters*
+converters		(string[])
+		It is a list of registered filter names to change items
+		attributes.
+		Items will be processed in the order you specify here.
+
+		Default: []
+
+					*ddu-source-option-defaultAction*
+defaultAction
+		Specify the default action.
+		Note: It overwrites kind default actions.
+
+		Default: ""
+
 				    	*ddu-source-option-ignoreCase*
 ignoreCase		(boolean)
 		If it is True, ddu ignores case.
 
 		Default: v:false
+
+						*ddu-source-option-matcherKey*
+matcherKey		(string)
+		Matcher compare key for items.
+
+		Default: "word"
+
+				    		*ddu-source-option-matchers*
+matchers		(string[])
+		It is a list of registered filter names to filter items
+		by user input.
+		Items will be processed in the order you specify here.
+
+		Default: []
+
+				    		*ddu-source-option-sorters*
+sorters			(string[])
+		It is a list of registered filter names to sort items.
+		Items will be processed in the order you specify here.
+
+		Default: []
 
 
 ------------------------------------------------------------------------------
@@ -379,7 +463,12 @@ KINDS							*ddu-kinds*
 ------------------------------------------------------------------------------
 KIND OPTIONS						*ddu-kind-options*
 
-Undefined now
+				    	*ddu-kind-option-defaultAction*
+defaultAction	(string)
+		Specify the default action.
+
+		Default: ""
+
 
 ------------------------------------------------------------------------------
 KIND PARAMS						*ddu-kind-params*
@@ -409,9 +498,9 @@ SOURCE ATTRIBUTES				*ddu-source-attributes*
 ------------------------------------------------------------------------------
 ITEM ATTRIBUTES						*ddu-item-attributes*
 
-					*ddu-item-attribute-word*
-word		(String)			(Required)
-		The word of a item. It is used for matching inputs.
+					*ddu-item-attribute-action*
+action		(List)			(Optional)
+		The dictionary of actions.
 
 					*ddu-item-attribute-display*
 display		(String)			(Optional)
@@ -419,6 +508,25 @@ display		(String)			(Optional)
 		attribute is used instead.  It is not used for matching
 		inputs.
 
+					*ddu-item-attribute-highlights*
+highlights	(List)			(Optional)
+		The list of highlight.
+
+		name				(string)
+		The highlight name.
+
+		hl_group			(string)
+		|:highlight| group.  Please see |highlight-groups|.
+
+		col				(number)
+		The highlight start column.
+
+		width				(number)
+		The highlight end width.
+
+					*ddu-item-attribute-word*
+word		(String)			(Required)
+		The word of a item. It is used for matching inputs.
 
 ==============================================================================
 CREATE FILTER						*ddu-create-filter*
@@ -470,6 +578,17 @@ https://github.com/Shougo/ddu-commands.vim
 
 ==============================================================================
 COMPATIBILITY						*ddu-compatibility*
+
+2022.02.09
+* Replace ddu#quit() to ddu#event().
+
+2022.02.04
+* neovim 0.6 is required.
+* Users must set default kind.
+* Cannot mix multiple kinds/sources for item action.
+
+2022.01.29
+* Rename ddu#do_action() to ddu#item_action().
 
 2022.01.27
 * Rename ddu#narrow() to ddu#redraw().

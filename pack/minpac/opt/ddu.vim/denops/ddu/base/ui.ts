@@ -7,6 +7,11 @@ import {
 } from "../types.ts";
 import { Denops } from "../deps.ts";
 
+export type UiActions<Params extends Record<string, unknown>> = Record<
+  string,
+  (args: ActionArguments<Params>) => Promise<ActionFlags>
+>;
+
 export type OnInitArguments<Params extends Record<string, unknown>> = {
   denops: Denops;
   uiOptions: UiOptions;
@@ -62,10 +67,7 @@ export abstract class BaseUi<
 
   async quit(_args: QuitArguments<Params>): Promise<void> {}
 
-  actions: Record<
-    string,
-    (args: ActionArguments<Params>) => Promise<ActionFlags>
-  > = {};
+  actions: UiActions<Params> = {};
 
   abstract params(): Params;
 }

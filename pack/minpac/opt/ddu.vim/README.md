@@ -1,6 +1,6 @@
 # ddu.vim
 
-Note: It is alpha version yet. You can test the features.
+Note: It is beta version. You can test the features.
 
 > Dark deno-powered UI framework for neovim/Vim8
 
@@ -42,7 +42,7 @@ better than neovim Python interface.
 
 ## Install
 
-**Note:** Ddu.vim requires Neovim (0.5.0+ and of course, **latest** is
+**Note:** Ddu.vim requires Neovim (0.6.0+ and of course, **latest** is
 recommended) or Vim 8.2.0662. See [requirements](#requirements) if you aren't
 sure whether you have this.
 
@@ -98,11 +98,22 @@ Ddu.vim requires both Deno and denops.vim.
 ## Configuration
 
 ```vim
-" You must set the default ui in the first
-" Note: std ui
-" https://github.com/Shougo/ddu-ui-std
+" You must set the default ui.
+" Note: ff ui
+" https://github.com/Shougo/ddu-ui-ff
 call ddu#custom#patch_global({
-    \ 'ui': 'std',
+    \ 'ui': 'ff',
+    \ })
+
+" You must set the default action.
+" Note: file kind
+" https://github.com/Shougo/ddu-kind-file
+call ddu#custom#patch_global({
+    \   'kindOptions': {
+    \     'file': {
+    \       'defaultAction': 'open',
+    \     },
+    \   }
     \ })
 
 " Specify matcher.
