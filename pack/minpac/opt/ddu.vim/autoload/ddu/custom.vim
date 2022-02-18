@@ -20,7 +20,14 @@ function! ddu#custom#set_local(name, dict) abort
   call s:notify('setLocal', [a:dict, a:name])
 endfunction
 
+let s:aliases = { 'ui': {}, 'source': {}, 'filter': {}, 'kind': {} }
 function! ddu#custom#alias(type, alias, base) abort
+  if !has_key(s:aliases, a:type)
+    call ddu#util#print_error('Invalid alias type: ' . a:type)
+    return
+  endif
+
+  let s:aliases[a:type][a:alias] = a:base
   call s:notify('alias', [a:type, a:alias, a:base])
 endfunction
 
@@ -52,6 +59,9 @@ function! ddu#custom#get_local() abort
 endfunction
 function! ddu#custom#get_default_options() abort
   return ddu#_request('getDefaultOptions', [])
+endfunction
+function! ddu#custom#get_aliases() abort
+  return s:aliases
 endfunction
 
 function! s:notify(method, args) abort

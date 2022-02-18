@@ -16,6 +16,7 @@ export type Context = {
   done: boolean;
   input: string;
   maxItems: number;
+  winId: number;
 };
 
 export type Custom = {
@@ -59,6 +60,7 @@ export type SourceOptions = {
   ignoreCase: boolean;
   matcherKey: string;
   matchers: string[];
+  maxItems: number;
   sorters: string[];
 };
 

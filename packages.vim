@@ -27,6 +27,7 @@ call minpac#add('kana/vim-textobj-entire')
 call minpac#add('JamshedVesuna/vim-markdown-preview')
 call minpac#add('masukomi/vim-markdown-folding')
 call minpac#add('mileszs/ack.vim')
+call minpac#add('easymotion/vim-easymotion')
 
 call minpac#add('rking/ag.vim', {'type': 'opt'})
 call minpac#add('kana/vim-vspec', {'type': 'opt'})

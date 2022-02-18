@@ -40,6 +40,8 @@ endif
 
 " Self added
 set laststatus=2
+set noswapfile
+set nobackup
 
 " http://vimcasts.org/episodes/minpac/
 source ~/.vim/packages.vim
@@ -215,7 +217,7 @@ let g:pymode_run_bind = '<leader>r'
 let g:pymode_lint = 1
 let g:pymode_breakpoint = 1
 let g:pymode_virtualenv = 1
-" let g:pymode_folding = 0
+let g:pymode_folding = 0
 
 let g:pymode_options = 1
 
@@ -226,6 +228,9 @@ let g:pymode_rope_completion = 1
 let g:pymode_rope_autoimport = 0
 
 
-let vim_markdown_preview_pandoc=1
-let vim_markdown_preview_browser='Firefox'
+" Options for vim-markdown-preview
+let vim_markdown_preview_toggle=1
 let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Firefox'
+let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_pandoc=1

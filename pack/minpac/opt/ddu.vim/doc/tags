@@ -1,6 +1,8 @@
 ddu	ddu.txt	/*ddu*
 ddu#custom#action()	ddu.txt	/*ddu#custom#action()*
 ddu#custom#alias()	ddu.txt	/*ddu#custom#alias()*
+ddu#custom#get_aliases()	ddu.txt	/*ddu#custom#get_aliases()*
+ddu#custom#get_default_options()	ddu.txt	/*ddu#custom#get_default_options()*
 ddu#custom#get_global()	ddu.txt	/*ddu#custom#get_global()*
 ddu#custom#get_local()	ddu.txt	/*ddu#custom#get_local()*
 ddu#custom#patch_global()	ddu.txt	/*ddu#custom#patch_global()*
@@ -59,6 +61,7 @@ ddu-source-option-defaultAction	ddu.txt	/*ddu-source-option-defaultAction*
 ddu-source-option-ignoreCase	ddu.txt	/*ddu-source-option-ignoreCase*
 ddu-source-option-matcherKey	ddu.txt	/*ddu-source-option-matcherKey*
 ddu-source-option-matchers	ddu.txt	/*ddu-source-option-matchers*
+ddu-source-option-maxItems	ddu.txt	/*ddu-source-option-maxItems*
 ddu-source-option-sorters	ddu.txt	/*ddu-source-option-sorters*
 ddu-source-options	ddu.txt	/*ddu-source-options*
 ddu-source-params	ddu.txt	/*ddu-source-params*
