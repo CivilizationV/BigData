@@ -1,12 +1,13 @@
-Installation:
+# Installation
+1. Installation:
 
     git clone git@github.com:CivilizationV/dotvim.git ~/.vim
 
-Create symlinks:
+2. Create symlinks:
 
     ln -s ~/.vim/vimrc ~/.vimrc
 
-Switch to the `~/.vim` directory, and fetch submodules:
+3. Switch to the `~/.vim` directory, and fetch submodules:
 
     cd ~/.vim
     git submodule init
