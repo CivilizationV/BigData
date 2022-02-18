@@ -67,3 +67,9 @@
 [submodule "pack/minpac/start/ack.vim"]
 	path = pack/minpac/start/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "pack/minpac/start/vim-easymotion"]
+	path = pack/minpac/start/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion.git
+[submodule "pack/minpac/start/vim-markdown-preview"]
+	path = pack/minpac/start/vim-markdown-preview
+	url = https://github.com/JamshedVesuna/vim-markdown-preview.git
