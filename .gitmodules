@@ -64,3 +64,6 @@
 [submodule "pack/minpac/start/python-mode"]
 	path = pack/minpac/start/python-mode
 	url = https://github.com/python-mode/python-mode
+[submodule "pack/minpac/start/ack.vim"]
+	path = pack/minpac/start/ack.vim
+	url = https://github.com/mileszs/ack.vim.git
