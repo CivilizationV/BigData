@@ -98,6 +98,11 @@ name
 
 		Default: "default"
 
+							*ddu-option-profile*
+profile
+		Print profile result.
+		Note: It is for debug.
+
 							*ddu-option-push*
 push
 		Save the current ddu state and create new ddu state.
@@ -229,6 +234,8 @@ ddu#redraw({name}[, {opt}])
 							*ddu#start()*
 ddu#start({options})
 		Creates a new Ddu.
+		Note: You cannot call it in |vim_starting|.  Because
+		denops.vim is not initialized.
 
 		Refer to |ddu-options| about {options}.  If you skip a value,
 		it uses the default value.

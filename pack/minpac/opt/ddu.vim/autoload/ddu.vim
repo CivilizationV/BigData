@@ -20,24 +20,45 @@ function! ddu#get_item_actions(name, items) abort
   return ddu#_request('getItemActions', [a:name, a:items])
 endfunction
 
-function! ddu#_request(name, args) abort
-  if ddu#_init()
+function! ddu#_request(method, args) abort
+  if s:init()
     return {}
   endif
 
-  call denops#plugin#wait('ddu')
-  return denops#request('ddu', a:name, a:args)
-endfunction
-function! ddu#_notify(name, args) abort
-  if ddu#_init()
+  " Note: If call denops#plugin#wait() in vim_starting, freezed!
+  if denops#server#status() !=# 'running' && has('vim_starting')
+    call ddu#util#print_error(
+          \ printf('You cannot call "%s" before denops.vim initialized.',
+          \        a:method))
     return {}
   endif
 
-  call denops#plugin#wait('ddu')
-  return denops#notify('ddu', a:name, a:args)
+  if denops#plugin#wait('ddu')
+    return {}
+  endif
+  return denops#request('ddu', a:method, a:args)
+endfunction
+function! ddu#_notify(method, args) abort
+  if s:init()
+    return {}
+  endif
+
+  if ddu#_denops_running()
+    if denops#plugin#wait('ddu')
+      return {}
+    endif
+    call denops#notify('ddu', a:method, a:args)
+  else
+    " Lazy call notify
+    execute printf('autocmd User DDUReady call ' .
+          \ 'denops#notify("ddu", "%s", %s)',
+          \ a:method, string(a:args))
+  endif
+
+  return {}
 endfunction
 
-function! ddu#_init() abort
+function! s:init() abort
   if exists('g:ddu#_initialized')
     return
   endif

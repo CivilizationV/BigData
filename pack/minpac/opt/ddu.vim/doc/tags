@@ -44,6 +44,7 @@ ddu-option-filterOptions	ddu.txt	/*ddu-option-filterOptions*
 ddu-option-filterParams	ddu.txt	/*ddu-option-filterParams*
 ddu-option-input	ddu.txt	/*ddu-option-input*
 ddu-option-name	ddu.txt	/*ddu-option-name*
+ddu-option-profile	ddu.txt	/*ddu-option-profile*
 ddu-option-push	ddu.txt	/*ddu-option-push*
 ddu-option-refresh	ddu.txt	/*ddu-option-refresh*
 ddu-option-resume	ddu.txt	/*ddu-option-resume*
