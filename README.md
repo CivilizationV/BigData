@@ -25,6 +25,7 @@
 2. [tpope/dotfiles](https://github.com/tpope/dotfiles)
 3. [sjl/dotfiles](https://github.com/sjl/dotfiles)
 4. [amix/vimrc](https://github.com/amix/vimrc)
+5. [aklt/plantuml-syntax](https://github.com/aklt/plantuml-syntax)
 
 ## Websites
 1. [vim home](https://www.vim.org/)
