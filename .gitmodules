@@ -43,9 +43,6 @@
 [submodule "pack/minpac/start/gundo.vim"]
 	path = pack/minpac/start/gundo.vim
 	url = https://github.com/sjl/gundo.vim.git
-[submodule "pack/minpac/opt/ag.vim"]
-	path = pack/minpac/opt/ag.vim
-	url = https://github.com/rking/ag.vim.git
 [submodule "pack/minpac/start/vim-colors-solarized"]
 	path = pack/minpac/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git

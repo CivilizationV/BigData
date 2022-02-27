@@ -231,6 +231,6 @@ let g:pymode_rope_autoimport = 0
 " Options for vim-markdown-preview
 let vim_markdown_preview_toggle=1
 let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='Firefox'
+let vim_markdown_preview_browser='Google Chrome'
 let vim_markdown_preview_temp_file=1
 let vim_markdown_preview_pandoc=1

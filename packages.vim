@@ -29,7 +29,6 @@ call minpac#add('masukomi/vim-markdown-folding')
 call minpac#add('mileszs/ack.vim')
 call minpac#add('easymotion/vim-easymotion')
 
-call minpac#add('rking/ag.vim', {'type': 'opt'})
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 call minpac#add('Shougo/ddu.vim', {'type': 'opt'})
