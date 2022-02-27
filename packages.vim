@@ -30,6 +30,7 @@ call minpac#add('mileszs/ack.vim')
 call minpac#add('easymotion/vim-easymotion')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
+call minpac#add('mg979/vim-visual-multi')
 
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})

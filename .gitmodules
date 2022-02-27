@@ -82,3 +82,6 @@
 [submodule "pack/minpac/start/fzf"]
 	path = pack/minpac/start/fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "pack/minpac/start/vim-visual-multi"]
+	path = pack/minpac/start/vim-visual-multi
+	url = https://github.com/mg979/vim-visual-multi.git
