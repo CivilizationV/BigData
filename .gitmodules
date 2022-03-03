@@ -85,3 +85,12 @@
 [submodule "pack/minpac/start/vim-visual-multi"]
 	path = pack/minpac/start/vim-visual-multi
 	url = https://github.com/mg979/vim-visual-multi.git
+[submodule "pack/minpac/start/vim-airline"]
+	path = pack/minpac/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "pack/minpac/start/syntastic"]
+	path = pack/minpac/start/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
+[submodule "pack/minpac/start/vim-gitgutter"]
+	path = pack/minpac/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
