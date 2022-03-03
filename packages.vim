@@ -34,6 +34,7 @@ call minpac#add('mg979/vim-visual-multi')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-syntastic/syntastic')
 call minpac#add('airblade/vim-gitgutter')
+call minpac#add('preservim/tagbar')
 
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
