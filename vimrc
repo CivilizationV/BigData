@@ -234,3 +234,28 @@ let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
 let vim_markdown_preview_temp_file=1
 let vim_markdown_preview_pandoc=1
+
+
+" Options for vim-visual-multi
+" let g:VM_default_mappings = 1
+" let g:VM_theme = 'iceblue'
+" let g:VM_maps = {}
+" let g:VM_maps["Undo"] = 'u'
+" let g:VM_maps["Redo"] = '<C-r>'
+" let g:VM_maps["Add Cursor Down"]   = '<C-j>'
+" let g:VM_maps["Add Cursor Up"]     = '<C-k>'
+
+
+" Settings for tagbar
+nmap <F7> :TagbarToggle<CR>
+
+
+" Settings for syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
