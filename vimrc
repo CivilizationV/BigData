@@ -192,7 +192,7 @@ if has('gui_running')
 else
 	set background=dark
 endif
-colorscheme solarized8
+colorscheme solarized
 set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 
@@ -252,13 +252,3 @@ let vim_markdown_preview_pandoc=1
 
 " Settings for tagbar
 nmap <F7> :TagbarToggle<CR>
-
-
-" Settings for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0

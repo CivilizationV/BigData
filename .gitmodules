@@ -37,9 +37,6 @@
 [submodule "pack/minpac/start/vim-highlightedyank"]
 	path = pack/minpac/start/vim-highlightedyank
 	url = https://github.com/machakann/vim-highlightedyank.git
-[submodule "pack/minpac/start/vim-solarized8"]
-	path = pack/minpac/start/vim-solarized8
-	url = https://github.com/lifepillar/vim-solarized8.git
 [submodule "pack/minpac/start/gundo.vim"]
 	path = pack/minpac/start/gundo.vim
 	url = https://github.com/sjl/gundo.vim.git
