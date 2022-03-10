@@ -88,12 +88,12 @@
 [submodule "pack/minpac/start/vim-airline"]
 	path = pack/minpac/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
-[submodule "pack/minpac/start/syntastic"]
-	path = pack/minpac/start/syntastic
-	url = https://github.com/vim-syntastic/syntastic.git
 [submodule "pack/minpac/start/vim-gitgutter"]
 	path = pack/minpac/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "pack/minpac/start/tagbar"]
 	path = pack/minpac/start/tagbar
 	url = https://github.com/preservim/tagbar.git
+[submodule "pack/minpac/start/ale"]
+	path = pack/minpac/start/ale
+	url = https://github.com/dense-analysis/ale.git

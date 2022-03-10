@@ -32,7 +32,7 @@ call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('mg979/vim-visual-multi')
 call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-syntastic/syntastic')
+call minpac#add('dense-analysis/ale')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('preservim/tagbar')
 
