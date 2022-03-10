@@ -66,8 +66,8 @@ xnoremap & :&&<CR>
 " Enable the ‘hidden’ Setting Before Running ‘:*do’ Commands
 set hidden
 
-" Execute ctags Manually
-nnoremap <f9> :!ctags -R<CR>
+" Execute ctags Manually, from Practical Vim Tip 103
+nnoremap <f5> :!ctags -R --java-kinds=+l<CR>
 " Automatically Execute ctags Each Time a File is Saved
 " :autocmd BufWritePost * call system("ctags -R")
 
@@ -205,6 +205,13 @@ nnoremap <Space> za
 vnoremap <Space> za
 set nofoldenable
 
+
+" Settings for netrw
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 2
+let g:netrw_winsize = 75
+
+
 " python
 let g:pymode_doc = 1
 let g:pymode_syntax = 1
@@ -218,12 +225,9 @@ let g:pymode_lint = 1
 let g:pymode_breakpoint = 1
 let g:pymode_virtualenv = 1
 let g:pymode_folding = 0
-
 let g:pymode_options = 1
-
 let g:pymode_rope = 1
 let g:pymode_rope_autoimport_modules = ["os", "shutil", "datetime"]
-
 let g:pymode_rope_completion = 1
 let g:pymode_rope_autoimport = 0
 
@@ -254,7 +258,6 @@ nmap <F7> :TagbarToggle<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
