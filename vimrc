@@ -72,7 +72,7 @@ nnoremap <f5> :!ctags -R --java-kinds=+l<CR>
 " :autocmd BufWritePost * call system("ctags -R")
 
 " Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+nnoremap <leader>l :set list!<CR>
 
 " Tab settings
 set tabstop=4
@@ -88,10 +88,10 @@ set noexpandtab
 " ‘ev’ stands for open in vertical split.
 " ‘et’ stands for open in tab.
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
+nnoremap <leader>ew :e %%
+nnoremap <leader>es :sp %%
+nnoremap <leader>ev :vsp %%
+nnoremap <leader>et :tabe %%
 
 " :set wrap linebreak nolist
 command! -nargs=* Wrap set wrap linebreak nolist
@@ -126,7 +126,7 @@ if &t_Co > 2 || has("gui_running")
 	" Switch on highlighting the last used search pattern.
 	set hlsearch
 endif
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>v :tabedit $MYVIMRC<CR>
 
 " http://vimcasts.org/episodes/tabs-and-spaces/
 " Set tabstop, softtabstop and shiftwidth to the same value
@@ -169,19 +169,19 @@ function! Preserve(command)
 	let @/=_s
 	call cursor(l, c)
 endfunction
-nmap <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
-nmap <leader>= :call Preserve("normal gg=G")<CR>
+nnoremap <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
+nnoremap <leader>= :call Preserve("normal gg=G")<CR>
 
 " http://vimcasts.org/episodes/bubbling-text/
 " Visually select the text that was last edited/pasted
-" nmap gV `[v`]
+" nnoremap gV `[v`]
 
 " http://vimcasts.org/episodes/undo-branching-and-gundo-vim/
 " Gundo.vim
 if has('python3') 
 	let g:gundo_prefer_python3 = 1 
 endif
-nnoremap <F8> :GundoToggle<CR>
+nnoremap <F9> :GundoToggle<CR>
 
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
 " https://github.com/altercation/vim-colors-solarized
@@ -198,7 +198,7 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
 nnoremap <silent> <Plug>TransposeCharacters xp :call repeat#set("\<Plug>TransposeCharacters")<CR>
-nmap cp <Plug>TransposeCharacters
+nnoremap cp <Plug>TransposeCharacters
 
 " Space to toggle folds.
 nnoremap <Space> za
@@ -251,4 +251,4 @@ let vim_markdown_preview_pandoc=1
 
 
 " Settings for tagbar
-nmap <F7> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
