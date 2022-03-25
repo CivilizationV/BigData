@@ -34,6 +34,7 @@ call minpac#add('vim-airline/vim-airline')
 call minpac#add('dense-analysis/ale')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('preservim/tagbar')
+call minpac#add('Yggdroot/indentLine')
 
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
