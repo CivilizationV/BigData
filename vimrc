@@ -21,7 +21,7 @@ source $VIMRUNTIME/defaults.vim
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-	au!
+	autocmd!
 
 	" For all text files set 'textwidth' to 78 characters.
 	autocmd FileType text setlocal textwidth=78
@@ -96,11 +96,13 @@ nnoremap <leader>et :tabe %%
 " :set wrap linebreak nolist
 command! -nargs=* Wrap set wrap linebreak nolist
 
+" FileType-specific settings ---------------------- {{{
 " http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 " http://vimcasts.org/episodes/running-vim-within-irb/
 " http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
 " Only do this part when compiled with support for autocommands
-if has("autocmd")
+augroup filetype_augroup
+	autocmd!
 	" Enable filetype detection
 	filetype plugin indent on
 	" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
@@ -110,7 +112,12 @@ if has("autocmd")
 	autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab textwidth=79 foldmethod=indent
     autocmd FileType c setlocal foldmethod=marker foldmarker={,}
     autocmd FileType java setlocal foldmethod=marker foldmarker={,}
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
 
+augroup self_augroup
+    autocmd!
 	" Restore cursor position
 	autocmd BufReadPost *
 		\ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -119,7 +126,8 @@ if has("autocmd")
 
 	" Source the vimrc file after saving it
 	autocmd BufWritePost .vimrc source $MYVIMRC
-endif
+augroup END
+
 if &t_Co > 2 || has("gui_running")
 	" Enable syntax highlighting
 	syntax on
@@ -193,7 +201,7 @@ else
 	set background=dark
 endif
 colorscheme solarized
-set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+" set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
