@@ -51,8 +51,8 @@ runtime macros/matchit.vim
 " Enable line numbering
 set number
 
-" Enable file-type plugin
-set nocompatible
+" Enable file-type plugin, default setting, :help defaults.vim
+" set nocompatible
 
 " Enable incremental search
 set incsearch
@@ -103,8 +103,8 @@ command! -nargs=* Wrap set wrap linebreak nolist
 " Only do this part when compiled with support for autocommands
 augroup filetype_augroup
 	autocmd!
-	" Enable filetype detection
-	filetype plugin indent on
+	" Enable filetype detection, default settings in defaults.vim
+	" filetype plugin indent on
 	" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 	" Syntax of these languages is fussy over tabs Vs spaces
 	autocmd FileType make setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
