@@ -260,3 +260,6 @@ let vim_markdown_preview_pandoc=1
 
 " Settings for tagbar
 nnoremap <F8> :TagbarToggle<CR>
+
+" fzf-mappings
+nnoremap <C-p> :<C-u>FZF<CR>

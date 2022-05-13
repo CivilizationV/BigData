@@ -19,6 +19,7 @@
 1. [Vim - Vi Improved](http://www.truth.sk/vim/vimbook-OPL.pdf)
 2. [Practical Vim](https://iccf-holland.org/vim_books.html#practical)
 3. [Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/)
+4. [Modern Vim: Craft Your Development Environment with Vim 8 and Neovim](https://www.amazon.com/Modern-Vim-Development-Environment-Neovim/dp/168050262X/ref=sr_1_4?keywords=vim&qid=1652414532&s=books&sr=1-4)
 
 ## Projects
 1. [nelstrom/dotfiles](https://github.com/nelstrom/dotfiles)

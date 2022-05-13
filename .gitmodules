@@ -100,3 +100,6 @@
 [submodule "pack/minpac/start/vim-tmux-navigator"]
 	path = pack/minpac/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "pack/minpac/start/vim-dispatch"]
+	path = pack/minpac/start/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git

@@ -36,6 +36,7 @@ call minpac#add('airblade/vim-gitgutter')
 call minpac#add('preservim/tagbar')
 call minpac#add('Yggdroot/indentLine')
 call minpac#add('christoomey/vim-tmux-navigator')
+call minpac#add('tpope/vim-dispatch')
 
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
