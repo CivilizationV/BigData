@@ -201,7 +201,6 @@ else
 	set background=dark
 endif
 colorscheme solarized
-" set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
@@ -270,4 +269,8 @@ nnoremap <silent> [W <Plug>(ale_first)
 nnoremap <silent> [w <Plug>(ale_previous)
 nnoremap <silent> ]w <Plug>(ale_next)
 nnoremap <silent> ]W <Plug>(ale_last)
+
+" terminal-mode escepe
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-v><Esc> <Esc>
 

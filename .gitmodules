@@ -106,3 +106,6 @@
 [submodule "pack/minpac/start/vim-test"]
 	path = pack/minpac/start/vim-test
 	url = https://github.com/vim-test/vim-test.git
+[submodule "pack/minpac/start/vim-obsession"]
+	path = pack/minpac/start/vim-obsession
+	url = https://github.com/tpope/vim-obsession.git
