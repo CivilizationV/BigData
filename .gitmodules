@@ -103,3 +103,6 @@
 [submodule "pack/minpac/start/vim-dispatch"]
 	path = pack/minpac/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "pack/minpac/start/vim-test"]
+	path = pack/minpac/start/vim-test
+	url = https://github.com/vim-test/vim-test.git

@@ -263,3 +263,11 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " fzf-mappings
 nnoremap <C-p> :<C-u>FZF<CR>
+
+" ale-mappings
+" Mappings in the style of unimpaired-next
+nnoremap <silent> [W <Plug>(ale_first)
+nnoremap <silent> [w <Plug>(ale_previous)
+nnoremap <silent> ]w <Plug>(ale_next)
+nnoremap <silent> ]W <Plug>(ale_last)
+
