@@ -112,3 +112,6 @@
 [submodule "pack/minpac/start/vimtex"]
 	path = pack/minpac/start/vimtex
 	url = https://github.com/lervag/vimtex.git
+[submodule "pack/minpac/start/plantuml-syntax"]
+	path = pack/minpac/start/plantuml-syntax
+	url = https://github.com/aklt/plantuml-syntax.git

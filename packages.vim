@@ -40,6 +40,7 @@ call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-obsession')
 call minpac#add('vim-test/vim-test')
 call minpac#add('lervag/vimtex')
+call minpac#add('aklt/plantuml-syntax')
 
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
