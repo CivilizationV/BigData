@@ -88,10 +88,10 @@ set noexpandtab
 " ‘ev’ stands for open in vertical split.
 " ‘et’ stands for open in tab.
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-nnoremap <leader>ew :e %%
-nnoremap <leader>es :sp %%
-nnoremap <leader>ev :vsp %%
-nnoremap <leader>et :tabe %%
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
 
 " :set wrap linebreak nolist
 command! -nargs=* Wrap set wrap linebreak nolist
