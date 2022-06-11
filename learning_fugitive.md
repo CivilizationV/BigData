@@ -1,4 +1,4 @@
-# browsing the git object database
+# [browsing the git object database](http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/)
 
 ## Reading a file from any git branch
 ```
@@ -30,7 +30,7 @@ Whenever your current buffer contains a git tree or blob, you can always jump up
 ```
 
 
-# exploring the history of a git repository
+# [exploring the history of a git repository](http://vimcasts.org/episodes/fugitive-vim-exploring-the-history-of-a-git-repository/)
 
 ## Browsing past revisions or commits in the quickfix list
 

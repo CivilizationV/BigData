@@ -31,3 +31,28 @@
 1. [vim home](https://www.vim.org/)
 2. [Seven Habits of Effective Text Editing](http://www.moolenaar.net/habits.html)
 3. [vimcasts](http://vimcasts.org/)
+
+
+# Plugins
+
+## vim-markdown-preview
+
+bugfix
+```
+diff --git a/plugin/vim-markdown-preview.vim b/plugin/vim-markdown-preview.vim
+index 082c69f..9e9e1f6 100644
+--- a/plugin/vim-markdown-preview.vim
++++ b/plugin/vim-markdown-preview.vim
+@@ -118,9 +118,9 @@ function! Vim_Markdown_Preview_Local()
+   if g:vim_markdown_preview_github == 1
+     call system('grip "' . b:curr_file . '" --export vim-markdown-preview.html --title vim-markdown-preview.html')
+   elseif g:vim_markdown_preview_perl == 1
+-    call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
++    call system('Markdown.pl "' . b:curr_file . '" > vim-markdown-preview.html')
+   elseif g:vim_markdown_preview_pandoc == 1
+-    call system('pandoc --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
++    call system('pandoc --standalone "' . b:curr_file . '" > vim-markdown-preview.html')
+   else
+     call system('markdown "' . b:curr_file . '" > vim-markdown-preview.html')
+   endif
+```
