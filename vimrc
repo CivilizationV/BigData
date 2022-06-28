@@ -42,6 +42,7 @@ endif
 set laststatus=2
 set noswapfile
 set nobackup
+set autoindent
 
 " http://vimcasts.org/episodes/minpac/
 source ~/.vim/packages.vim
@@ -67,9 +68,7 @@ xnoremap & :&&<CR>
 set hidden
 
 " Execute ctags Manually, from Practical Vim Tip 103
-nnoremap <f5> :!ctags -R --java-kinds=+l<CR>
-" Automatically Execute ctags Each Time a File is Saved
-" :autocmd BufWritePost * call system("ctags -R")
+nnoremap <F5> :!ctags -R --java-kinds=+l<CR>
 
 " Shortcut to rapidly toggle `set list`
 nnoremap <leader>l :set list!<CR>
