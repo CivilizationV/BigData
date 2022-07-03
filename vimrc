@@ -42,7 +42,10 @@ endif
 set laststatus=2
 set noswapfile
 set nobackup
-set autoindent
+set dictionary+=/usr/share/dict/words
+set complete+=k
+set nofoldenable
+noremap + :resize +1<CR>
 
 " http://vimcasts.org/episodes/minpac/
 source ~/.vim/packages.vim
@@ -95,7 +98,7 @@ map <leader>et :tabe %%
 " :set wrap linebreak nolist
 command! -nargs=* Wrap set wrap linebreak nolist
 
-" FileType-specific settings ---------------------- {{{
+" FileType-specific settings
 " http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 " http://vimcasts.org/episodes/running-vim-within-irb/
 " http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
@@ -109,11 +112,10 @@ augroup filetype_augroup
 	autocmd FileType make setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 	autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab textwidth=79 foldmethod=indent
-    autocmd FileType c setlocal foldmethod=marker foldmarker={,}
-    autocmd FileType java setlocal foldmethod=marker foldmarker={,}
+    autocmd FileType c setlocal foldmethod=syntax
+    autocmd FileType java setlocal foldmethod=syntax
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
-" }}}
 
 augroup self_augroup
     autocmd!
@@ -127,12 +129,11 @@ augroup self_augroup
 	autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
 
-if &t_Co > 2 || has("gui_running")
-	" Enable syntax highlighting
-	syntax on
-	" Switch on highlighting the last used search pattern.
-	set hlsearch
-endif
+" Enable syntax highlighting
+syntax enable
+syntax on
+" Switch on highlighting the last used search pattern.
+set hlsearch
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 
 " http://vimcasts.org/episodes/tabs-and-spaces/
@@ -193,7 +194,6 @@ nnoremap <F9> :GundoToggle<CR>
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
 " https://github.com/altercation/vim-colors-solarized
 " At first, set terminal emulator's colorscheme to used the Solarized palette
-syntax enable
 if has('gui_running')
 	set background=light
 else
@@ -205,12 +205,6 @@ colorscheme solarized
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
 nnoremap <silent> <Plug>TransposeCharacters xp :call repeat#set("\<Plug>TransposeCharacters")<CR>
 nnoremap cp <Plug>TransposeCharacters
-
-" Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
-set nofoldenable
-
 
 " Settings for netrw
 let g:netrw_liststyle = 3
