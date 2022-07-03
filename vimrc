@@ -46,6 +46,9 @@ set dictionary+=/usr/share/dict/words
 set complete+=k
 set nofoldenable
 noremap + :resize +1<CR>
+nnoremap :: q:
+nnoremap // q/
+nnoremap ?? q?
 
 " http://vimcasts.org/episodes/minpac/
 source ~/.vim/packages.vim
@@ -256,13 +259,6 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " fzf-mappings
 nnoremap <C-p> :<C-u>FZF<CR>
-
-" ale-mappings
-" Mappings in the style of unimpaired-next
-nnoremap <silent> [W <Plug>(ale_first)
-nnoremap <silent> [w <Plug>(ale_previous)
-nnoremap <silent> ]w <Plug>(ale_next)
-nnoremap <silent> ]W <Plug>(ale_last)
 
 " terminal-mode escepe
 tnoremap <Esc> <C-\><C-n>
