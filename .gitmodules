@@ -118,3 +118,6 @@
 [submodule "pack/minpac/start/YouCompleteMe"]
 	path = pack/minpac/start/YouCompleteMe
 	url = https://github.com/ycm-core/YouCompleteMe.git
+[submodule "pack/minpac/start/vimspector"]
+	path = pack/minpac/start/vimspector
+	url = https://github.com/puremourning/vimspector.git
