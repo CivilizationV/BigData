@@ -86,3 +86,26 @@ index 21db3470..a440d9b9 100755
      with open( file_path, 'wb' ) as package_file:
        package_file.write( response.read() )
 ```
+
+## vimspector
+
+```
+diff --git a/python3/vimspector/installer.py b/python3/vimspector/installer.py
+index edccd6a..b0e7f0d 100644
+--- a/python3/vimspector/installer.py
++++ b/python3/vimspector/installer.py
+@@ -32,6 +32,7 @@ import time
+ import traceback
+ import zipfile
+ import json
++import certifi
+
+ from vimspector import install, gadgets
+
+@@ -619,6 +620,7 @@ def WithRetry( f ):
+
+ @WithRetry
+ def UrlOpen( *args, **kwargs ):
++  kwargs['context'] = ssl.create_default_context(cafile=certifi.where())
+   return request.urlopen( *args, **kwargs )
+```
