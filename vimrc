@@ -270,4 +270,3 @@ nnoremap <silent> ]W <Plug>(ale_last)
 " terminal-mode escepe
 tnoremap <Esc> <C-\><C-n>
 tnoremap <C-v><Esc> <Esc>
-

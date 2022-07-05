@@ -64,9 +64,6 @@
 [submodule "pack/minpac/start/vim-markdown-preview"]
 	path = pack/minpac/start/vim-markdown-preview
 	url = https://github.com/JamshedVesuna/vim-markdown-preview.git
-[submodule "pack/minpac/opt/ddu.vim"]
-	path = pack/minpac/opt/ddu.vim
-	url = https://github.com/Shougo/ddu.vim.git
 [submodule "pack/minpac/opt/vim-scriptease"]
 	path = pack/minpac/opt/vim-scriptease
 	url = https://github.com/tpope/vim-scriptease.git
@@ -103,21 +100,18 @@
 [submodule "pack/minpac/start/vim-dispatch"]
 	path = pack/minpac/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule "pack/minpac/start/vim-test"]
-	path = pack/minpac/start/vim-test
-	url = https://github.com/vim-test/vim-test.git
 [submodule "pack/minpac/start/vim-obsession"]
 	path = pack/minpac/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "pack/minpac/start/vimtex"]
-	path = pack/minpac/start/vimtex
-	url = https://github.com/lervag/vimtex.git
 [submodule "pack/minpac/start/plantuml-syntax"]
 	path = pack/minpac/start/plantuml-syntax
 	url = https://github.com/aklt/plantuml-syntax.git
-[submodule "pack/minpac/start/YouCompleteMe"]
-	path = pack/minpac/start/YouCompleteMe
-	url = https://github.com/ycm-core/YouCompleteMe.git
 [submodule "pack/minpac/start/vimspector"]
 	path = pack/minpac/start/vimspector
 	url = https://github.com/puremourning/vimspector.git
+[submodule "pack/minpac/opt/vimtex"]
+	path = pack/minpac/opt/vimtex
+	url = https://github.com/lervag/vimtex.git
+[submodule "pack/minpac/opt/vim-test"]
+	path = pack/minpac/opt/vim-test
+	url = https://github.com/vim-test/vim-test.git
