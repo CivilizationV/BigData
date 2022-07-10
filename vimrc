@@ -39,12 +39,38 @@ endif
 
 
 " Self added
+set number
+set incsearch
+set hlsearch
 set laststatus=2
 set noswapfile
 set nobackup
 set dictionary+=/usr/share/dict/words
 set complete+=k
 set nofoldenable
+" Tab settings
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+
+" Enable the ‘hidden’ Setting Before Running ‘:*do’ Commands
+set hidden
+
+" Enable syntax highlighting
+syntax enable
+syntax on
+
+" http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
+" https://github.com/altercation/vim-colors-solarized
+" At first, set terminal emulator's colorscheme to used the Solarized palette
+if has('gui_running')
+	set background=light
+else
+	set background=dark
+endif
+colorscheme solarized
+
 noremap + :resize +1<CR>
 nnoremap :: q:
 nnoremap // q/
@@ -55,14 +81,9 @@ source ~/.vim/packages.vim
 
 runtime macros/matchit.vim
 
-" Enable line numbering
-set number
-
 " Enable file-type plugin, default setting, :help defaults.vim
 " set nocompatible
 
-" Enable incremental search
-set incsearch
 " Mute Search Highlighting
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
@@ -70,20 +91,8 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
-" Enable the ‘hidden’ Setting Before Running ‘:*do’ Commands
-set hidden
-
 " Execute ctags Manually, from Practical Vim Tip 103
 nnoremap <F5> :!ctags -R --java-kinds=+l<CR>
-
-" Shortcut to rapidly toggle `set list`
-nnoremap <leader>l :set list!<CR>
-
-" Tab settings
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
 
 " http://vimcasts.org/episodes/the-edit-command/
 " set of shortcuts for opening files located in the same directory as the
@@ -129,14 +138,9 @@ augroup self_augroup
 		\ endif
 
 	" Source the vimrc file after saving it
-	autocmd BufWritePost .vimrc source $MYVIMRC
+	autocmd BufWritePost vimrc source $MYVIMRC
 augroup END
 
-" Enable syntax highlighting
-syntax enable
-syntax on
-" Switch on highlighting the last used search pattern.
-set hlsearch
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 
 " http://vimcasts.org/episodes/tabs-and-spaces/
@@ -193,17 +197,6 @@ if has('python3')
 	let g:gundo_prefer_python3 = 1 
 endif
 nnoremap <F9> :GundoToggle<CR>
-
-" http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
-" https://github.com/altercation/vim-colors-solarized
-" At first, set terminal emulator's colorscheme to used the Solarized palette
-if has('gui_running')
-	set background=light
-else
-	set background=dark
-endif
-colorscheme solarized
-
 
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
 nnoremap <silent> <Plug>TransposeCharacters xp :call repeat#set("\<Plug>TransposeCharacters")<CR>
@@ -270,3 +263,11 @@ nnoremap <silent> ]W <Plug>(ale_last)
 " terminal-mode escepe
 tnoremap <Esc> <C-\><C-n>
 tnoremap <C-v><Esc> <Esc>
+
+" settings for vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = [ 'vscode-cpptools', 'debugpy', 'vscode-java-debug' ]
+
+" settings for ycm
+let g:ycm_extra_conf_globlist = ['~/.vim/pack/minpac/start/*']
+let g:ycm_semantic_triggers =  { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }

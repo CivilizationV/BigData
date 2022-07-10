@@ -109,3 +109,4 @@ index edccd6a..b0e7f0d 100644
 +  kwargs['context'] = ssl.create_default_context(cafile=certifi.where())
    return request.urlopen( *args, **kwargs )
 ```
+安装完后需要删除，否则执行命令的时候会报错。
