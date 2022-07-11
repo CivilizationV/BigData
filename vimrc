@@ -138,7 +138,7 @@ augroup self_augroup
 		\ endif
 
 	" Source the vimrc file after saving it
-	autocmd BufWritePost vimrc source $MYVIMRC
+	autocmd BufWritePost ~/.vimrc source ~/.vimrc
 augroup END
 
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
@@ -204,9 +204,9 @@ nnoremap cp <Plug>TransposeCharacters
 
 " Settings for netrw
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
+let g:netrw_browse_split = 0
 let g:netrw_preview = 1
-let g:netrw_winsize = 75
+" let g:netrw_winsize = 75
 
 
 " python
