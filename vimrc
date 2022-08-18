@@ -101,11 +101,10 @@ nnoremap <F5> :!ctags -R --java-kinds=+l<CR>
 " ‘es’ stands for open in split.
 " ‘ev’ stands for open in vertical split.
 " ‘et’ stands for open in tab.
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
+noremap <leader>ew :e <C-R>=fnameescape(expand('%:h')).'/'<cr>
+noremap <leader>es :sp <C-R>=fnameescape(expand('%:h')).'/'<cr>
+noremap <leader>ev :vsp <C-R>=fnameescape(expand('%:h')).'/'<cr>
+noremap <leader>et :tabe <C-R>=fnameescape(expand('%:h')).'/'<cr>
 
 " :set wrap linebreak nolist
 command! -nargs=* Wrap set wrap linebreak nolist

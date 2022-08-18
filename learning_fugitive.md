@@ -36,12 +36,12 @@ Whenever your current buffer contains a git tree or blob, you can always jump up
 
 | command                    | action                                                                                                   |
 | :------                    | :-----                                                                                                   |
-| `:Glog`                      | load all previous revisions of the current file into the quickfix list                                   |
-| `:Glog -10`                  | load the last ten previous revisions of the current file into the quickfix list                          |
-| `:Glog -10 --reverse`        | load the first ten revisions of the current file into the quickfix list (in reverse chronological order) |
-| `:Glog -1 --until=yesterday` | load the last version of the current file that was checked in before midnight last night                 |
-| `:Glog --`                   | load all ancestral commit objects into the quickfix list                                                 |
-| `:Glog -- %`                 | load all ancestral commit objects that touched the current file into the quickfix list                   |
+| `:Gclog`                      | load all previous revisions of the current file into the quickfix list                                   |
+| `:Gclog -10`                  | load the last ten previous revisions of the current file into the quickfix list                          |
+| `:Gclog -10 --reverse`        | load the first ten revisions of the current file into the quickfix list (in reverse chronological order) |
+| `:Gclog -1 --until=yesterday` | load the last version of the current file that was checked in before midnight last night                 |
+| `:Gclog --`                   | load all ancestral commit objects into the quickfix list                                                 |
+| `:Gclog -- %`                 | load all ancestral commit objects that touched the current file into the quickfix list                   |
 
 ## Searching a git repository
 
@@ -87,15 +87,15 @@ git log
 git log --grep=findme
 ```
 
-:Glog
+:Gclog
 ```
-:Glog --grep='xtype' --
+:Gclog --grep='xtype' --
 ```
 
 | command                  | action                                                                                    |
 | -------                  | ------                                                                                    |
-| `:Glog --grep=findme --`   | search for ‘findme’ in all ancestral commit messages                                      |
-| `:Glog --grep=findme -- %` | search for ‘findme’ in all ancestral commit messages that touch the currently active file |
+| `:Gclog --grep=findme --`   | search for ‘findme’ in all ancestral commit messages                                      |
+| `:Gclog --grep=findme -- %` | search for ‘findme’ in all ancestral commit messages that touch the currently active file |
 
 
 ### Searching for text added or removed by a commit
@@ -105,13 +105,13 @@ git log
 git log -Sfindme
 ```
 
-:Glog
+:Gclog
 ```
-:Glog -Spaginate --
+:Gclog -Spaginate --
 ```
 
 | command             | action                                                                                           |
 | -------             | ------                                                                                           |
-| `:Glog -Sfindme --`   | search for ‘findme’ in the diff for each ancestral commit                                        |
-| `:Glog -Sfindme -- %` | search for ‘findme’ in the diff for each ancestral commit that touches the currently active file |
+| `:Gclog -Sfindme --`   | search for ‘findme’ in the diff for each ancestral commit                                        |
+| `:Gclog -Sfindme -- %` | search for ‘findme’ in the diff for each ancestral commit that touches the currently active file |
 
