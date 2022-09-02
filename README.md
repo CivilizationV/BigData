@@ -19,8 +19,8 @@
 1. [Vim - Vi Improved](http://www.truth.sk/vim/vimbook-OPL.pdf)
 2. [Practical Vim](https://iccf-holland.org/vim_books.html#practical)
 3. [Learning the vi and Vim Editors](https://www.amazon.com/Learning-Vim-Editors-Agility-Editing/dp/1492078808/ref=sr_1_1?keywords=Learning+the+vi+and+Vim+Editors&qid=1655900505&s=books&sr=1-1)
-4. [Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/)
-5. [Modern Vim: Craft Your Development Environment with Vim 8 and Neovim](https://www.amazon.com/Modern-Vim-Development-Environment-Neovim/dp/168050262X/ref=sr_1_4?keywords=vim&qid=1652414532&s=books&sr=1-4)
+4. ~~[Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/)~~
+5. ~~[Modern Vim: Craft Your Development Environment with Vim 8 and Neovim](https://www.amazon.com/Modern-Vim-Development-Environment-Neovim/dp/168050262X/ref=sr_1_4?keywords=vim&qid=1652414532&s=books&sr=1-4)~~
 
 ## Projects
 1. [vim/vim](https://github.com/vim/vim.git)
