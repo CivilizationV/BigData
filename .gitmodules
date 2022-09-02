@@ -64,9 +64,6 @@
 [submodule "pack/minpac/start/vim-markdown-preview"]
 	path = pack/minpac/start/vim-markdown-preview
 	url = https://github.com/JamshedVesuna/vim-markdown-preview.git
-[submodule "pack/minpac/opt/vim-scriptease"]
-	path = pack/minpac/opt/vim-scriptease
-	url = https://github.com/tpope/vim-scriptease.git
 [submodule "pack/minpac/opt/vim-vspec"]
 	path = pack/minpac/opt/vim-vspec
 	url = https://github.com/kana/vim-vspec.git
@@ -109,9 +106,6 @@
 [submodule "pack/minpac/start/vimspector"]
 	path = pack/minpac/start/vimspector
 	url = https://github.com/puremourning/vimspector.git
-[submodule "pack/minpac/opt/vimtex"]
-	path = pack/minpac/opt/vimtex
-	url = https://github.com/lervag/vimtex.git
 [submodule "pack/minpac/opt/vim-test"]
 	path = pack/minpac/opt/vim-test
 	url = https://github.com/vim-test/vim-test.git

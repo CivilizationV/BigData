@@ -43,7 +43,4 @@ call minpac#add('aklt/plantuml-syntax')
 call minpac#add('puremourning/vimspector')
 
 call minpac#add('vim-test/vim-test', {'type': 'opt'})
-call minpac#add('lervag/vimtex', {'type': 'opt'})
 call minpac#add('kana/vim-vspec', {'type': 'opt'})
-call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
-" call minpac#add('Shougo/ddu.vim', {'type': 'opt'})
