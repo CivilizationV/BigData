@@ -59,34 +59,6 @@ index 082c69f..9e9e1f6 100644
    endif
 ```
 
-## YouCompleteMe
-
-bugfix
-unable to get local issuer certificate
-```
-diff --git a/build.py b/build.py
-index 21db3470..a440d9b9 100755
---- a/build.py
-+++ b/build.py
-@@ -18,6 +18,8 @@ import tarfile
- from zipfile import ZipFile
- import tempfile
- import urllib.request
-+import ssl
-+import certifi
-
-
- class InstallationFailed( Exception ):
-@@ -146,7 +148,7 @@ def CheckFileIntegrity( file_path, check_sum ):
-
-
- def DownloadFileTo( download_url, file_path ):
--  with urllib.request.urlopen( download_url ) as response:
-+  with urllib.request.urlopen( download_url, context=ssl.create_default_context(cafile=certifi.where())) as response:
-     with open( file_path, 'wb' ) as package_file:
-       package_file.write( response.read() )
-```
-
 ## vimspector
 
 ```
