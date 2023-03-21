@@ -126,6 +126,14 @@ augroup filetype_augroup
     autocmd FileType c setlocal foldmethod=syntax
     autocmd FileType java setlocal foldmethod=syntax
 	autocmd FileType vim setlocal foldmethod=marker
+
+	" Customisations based on house-style (arbitrary)
+	autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+
+	" Treat .rss files as XML
+	autocmd BufNewFile,BufRead *.rss setfiletype xml
 augroup END
 
 augroup self_augroup
